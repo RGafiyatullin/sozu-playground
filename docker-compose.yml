@@ -1,0 +1,24 @@
+version: '3.5'
+
+services:
+  sozu:
+    image: 'sozu:src'
+    volumes:
+      - './mounts/sozu-etc:/etc/sozu:ro'
+    command: ["start", "--config", "/etc/sozu/config.toml"]
+    ports:
+      - '8080:80/tcp'
+
+  ping-1:
+    build: build/ping-service
+    environment:
+      APP_ID: ping-1
+
+  ping-2:
+    build: build/ping-service
+    environment:
+      APP_ID: ping-2
+
+  maintenance-node:
+    image: debian:jessie
+    command: ["ping", "sozu"]

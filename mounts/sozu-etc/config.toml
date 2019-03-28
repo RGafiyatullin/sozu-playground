@@ -1,0 +1,22 @@
+
+log_level = "info"
+log_target = "stdout"
+command_socket = "/tmp/sozu.sock"
+worker_count = 1
+worker_automatic_restart = true
+handle_process_affinity = false
+max_connections = 500
+max_buffers = 500
+tls_provider = "rustls"
+
+[[listeners]]
+protocol = "http"
+address = "0.0.0.0:80"
+
+[[listeners]]
+protocol = "https"
+address = "0.0.0.0:443"
+
+tls_versions = ["TLSv1.2", "TLSv1.3"]
+
+[applications]
